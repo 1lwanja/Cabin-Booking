@@ -1,33 +1,44 @@
-import SortBy from "../../ui/SortBy";
-import Filter from "../../ui/Filter";
-import TableOperations from "../../ui/TableOperations";
+import BookingRow from "./BookingRow";
+import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
+import Empty from "../../ui/Empty";
 
-function BookingTableOperations() {
+import { useBookings } from "./useBookings";
+import Spinner from "../../ui/Spinner";
+import Pagination from "../../ui/Pagination";
+
+function BookingTable() {
+  const { bookings, isLoading, count } = useBookings();
+
+  if (isLoading) return <Spinner />;
+
+  if (!bookings.length) return <Empty resourceName="bookings" />;
+
   return (
-    <TableOperations>
-      <Filter
-        filterField="status"
-        options={[
-          { value: "all", label: "All" },
-          { value: "checked-out", label: "Checked out" },
-          { value: "checked-in", label: "Checked in" },
-          { value: "unconfirmed", label: "Unconfirmed" },
-        ]}
-      />
+    <Menus>
+      <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">
+        <Table.Header>
+          <div>Cabin</div>
+          <div>Guest</div>
+          <div>Dates</div>
+          <div>Status</div>
+          <div>Amount</div>
+          <div></div>
+        </Table.Header>
 
-      <SortBy
-        options={[
-          { value: "startDate-desc", label: "Sort by date (recent first)" },
-          { value: "startDate-asc", label: "Sort by date (earlier first)" },
-          {
-            value: "totalPrice-desc",
-            label: "Sort by amount (high first)",
-          },
-          { value: "totalPrice-asc", label: "Sort by amount (low first)" },
-        ]}
-      />
-    </TableOperations>
+        <Table.Body
+          data={bookings}
+          render={(booking) => (
+            <BookingRow key={booking.id} booking={booking} />
+          )}
+        />
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
+      </Table>
+    </Menus>
   );
 }
 
-export default BookingTableOperations;
+export default BookingTable;

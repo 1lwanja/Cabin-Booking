@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { HiOutlineHome, HiOutlineUsers } from "react-icons/hi";
 import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
+  HiOutlineHome,
   HiOutlineHomeModern,
+  HiOutlineUsers,
 } from "react-icons/hi2";
 
 const NavList = styled.ul`
@@ -61,31 +61,31 @@ function MainNav() {
           <StyledNavLink to="/dashboard">
             <HiOutlineHome />
             <span>Home</span>
-          </StyledNavLink>{" "}
+          </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/bookings">
             <HiOutlineCalendarDays />
             <span>Bookings</span>
-          </StyledNavLink>{" "}
+          </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/cabins">
             <HiOutlineHomeModern />
             <span>Cabins</span>
-          </StyledNavLink>{" "}
+          </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
             <span>Users</span>
-          </StyledNavLink>{" "}
+          </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/settings">
             <HiOutlineCog6Tooth />
             <span>Settings</span>
-          </StyledNavLink>{" "}
+          </StyledNavLink>
         </li>
       </NavList>
     </nav>
